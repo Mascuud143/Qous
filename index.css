@@ -1,0 +1,106 @@
+body{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    color:white;
+    font-size: 16px;
+}
+
+
+.container{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #082032;
+}
+
+nav{
+    position: absolute;
+    top: 30px;
+    padding-top: 20px;
+    width: 80%;
+    height: max-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.date{
+    display: flex;
+    align-items: center;
+    min-width: 20%;
+}
+
+nav .date{
+    display: flex;
+}
+
+.date-hour{
+    margin-right: 20px;
+    font-size: 50px;
+}
+
+main{
+    width: 80%;
+    min-height: 300px;
+    
+}
+
+.weather{
+    /* background-color: #3B5D77; */
+    padding: 10px;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.next-days{
+    display: flex;
+}
+
+
+
+/* MODAL */
+
+.modal{
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-color: #FFFFFF;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.modal-header{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    height: fit-content;
+    padding: 20px;
+
+    border-bottom: 1px solid black;
+}
+
+.hidden{
+    display: none;
+}
+
+.next-days div{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.next-days div:not(:first-child) {
+    margin-left: 10px;
+    border-left: 1px solid rgba(226, 226, 226, 0.425);
+    padding-left: 10px;
+}
