@@ -338,6 +338,9 @@ main>*{
   filter: grayscale(100%);
 }
 
+
+
+
 .shopping-action{
     width: 80%;
     margin: 20px;
@@ -509,4 +512,10 @@ margin: 10px;
     font-size: 15px;
     text-decoration: wavy;
     margin-bottom: 10px;
+}
+
+.modal-shopping{
+    color: #fff;
+    background-color: #082032;
+
 }

@@ -125,16 +125,22 @@ function displayDate(){
 
 async function getWeatherData(city){
 
-    let lat;
-    let long;
-    navigator.geolocation.getCurrentPosition((position) => {
-        lat = position.coords.latitude;
-        long = position.coords.longitude;
+    let lat = 63.4305;
+    let long = 10.3951;
+    // navigator.geolocation.getCurrentPosition((position) => {
+    //     lat = position.coords.latitude;
+    //     long = position.coords.longitude;
 
-      });
+    //   });
+
+      console.log(lat)
+      console.log(long)
 
     // const link = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${lat}.10&lon=${long}`
-    const link = `https://api.tomorrow.io/v4/timelines?location=40.75872069597532,-73.98529171943665&fields=temperature&timesteps=1h&units=metric&apikey=XtLvbDDG9LOPU3wtfvcswAA6rrg1ytyA`
+    // const link = `https://api.tomorrow.io/v4/timelines?location=40.75872069597532,-73.98529171943665&fields=temperature&timesteps=1h&units=metric&apikey=XtLvbDDG9LOPU3wtfvcswAA6rrg1ytyA`
+    const APIKey = `a5119b46c74d635711f592e966870833`
+    const link = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${APIKey}`
+    const forcast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${APIKey}`
 
       const nextdays={
         day1:{
@@ -152,22 +158,40 @@ async function getWeatherData(city){
       }
 
     fetch(link).then(res=> res.json().then(data=>{
-        const weatherNow = Math.round((data.data.timelines[0].intervals[0].values.temperature))
+        console.log(data)
+        const weatherNow = Math.round((data.main.temp))-273
         temperature.textContent = weatherNow+" "+"℃";
     
 
         
-        nextdays.day1.temp = Math.round(data.data.timelines[0].intervals[26].values.temperature)
-        nextdays.day2.temp = Math.round(data.data.timelines[0].intervals[26+24].values.temperature)
-        nextdays.day3.temp = Math.round(data.data.timelines[0].intervals[26+(24*2)].values.temperature)
+        
+
+    })).catch(err=> console.log(err))
+    
+    
+    
+    
+    fetch(forcast).then(res=>res.json()).then(data=>{
+        
+        const hour = new Date().getHours()
+        
+        // Slice up the two thr next days data
+        const nextDays = data.list.slice((23-hour), (23-hour+24))
+        console.log(nextDays)
+        
+        
+        nextdays.day1.temp = Math.round(nextDays[5].main.temp)-273
+        nextdays.day2.temp = Math.round(nextDays[5+8].main.temp)-273
+        nextdays.day3.temp = Math.round(nextDays[5+16].main.temp)-273
 
 
+        console.log()
+        
         document.querySelector(".day1").innerHTML = getNextDays()[0]+`<span>${nextdays.day1.temp} ℃</span>`
         document.querySelector(".day2").innerHTML = getNextDays()[1]+`<span>${nextdays.day2.temp} ℃</span>`
         document.querySelector(".day3").innerHTML = getNextDays()[2]+`<span>${nextdays.day3.temp} ℃</span>`
-    })).catch(err=> console.log(err))
 
-
+    })
 
 }
 
