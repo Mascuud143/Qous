@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+    <link 
+  href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
+  rel="stylesheet"  type='text/css'>
     <title>Document</title>
 </head>
 <body>
@@ -20,24 +24,83 @@
         </div>
 
         <div class="nav-items">
-            <button class="btn-home">Gurigga</button>
-            <button class="btn-family">Qoyska</button>
-            <button>C</button>
+            <button class="nav-item btn-home"><i class="fa-solid fa-house"></i> Gurigga</button>
+            <button class="nav-item btn-family"><i class="fa-solid fa-users"></i> Qoyska</button>
+            <button class="nav-item">QOUS</button>
         </div>
     </nav>       
 
     <main>
-        <div class="weather">
-            <div class="location">Trondheim</div>
-            <div class="weather-temperature"></div>
-            <div class="next-days">
-                <div class="day1"></div>
-                <div class="day2"></div>
-                <div class="day3"></div>
+        <div class="row1">
+
+            <div class="main-section  weather">
+                <div class="location">Trondheim</div>
+                
+                <div class="weather-temperature"></div>
+                <div class="next-days">
+                    <div class="day1"></div>
+                    <div class="day2"></div>
+                    <div class="day3"></div>
+                </div>
+            </div>
+            <div class="main-section shopping-btn  hero-action shopping">
+                    <div>Shopping</div> 
+                <i class="fa-solid fa-cart-shopping action-icon"></i> 
+              
+            </div>
+            <div class="main-section calender-btn calender hero-action">
+
+               <div>Calender</div>
+               <i class="fa-solid fa-calendar-days action-icon"></i>
+            </div>
+
+            <div class="main-section the-family">
+                <div class="family-title">The John Family</div>
+                <div class="family-pictures">
+                    <div>
+
+                        <img src="https://xsgames.co/randomusers/assets/avatars/male/25.jpg" alt="">
+                        <img src="https://xsgames.co/randomusers/assets/avatars/female/57.jpg" alt="">
+                        <img src="https://xsgames.co/randomusers/assets/avatars/male/44.jpg" alt="">
+                    </div>
+                    <div>
+
+                        <img src="https://xsgames.co/randomusers/assets/avatars/female/45.jpg" alt="">
+                        <img src="https://xsgames.co/randomusers/assets/avatars/female/32.jpg" alt="">
+                    </div>
+                </div>
+                <div class="family-screen">It's Mary's birthday!</div>
             </div>
         </div>
-        <div class="shopping">
-            <button class="shopping-btn">Shopping</button>
+        <div class="row2">
+            <div class="main-section coming-soon salah">
+                <h3>Salah</h3>
+                <div class="current-salah">
+                    Fajr <div class="current-salah-adan">1300</div>
+                </div>
+                <div class="salah-table">
+                    <div class="salah1">Dhuhur <div class="salah1-adan">1500</div> <div class="salah1-iqamah">1510</div> </div>
+                    <div class="salah1">Dhuhur <div class="salah1-adan">1500</div> <div class="salah1-iqamah">1510</div> </div>
+                    <div class="salah1">Dhuhur <div class="salah1-adan">1500</div> <div class="salah1-iqamah">1510</div> </div>
+                </div>
+            </div>
+
+            <div class="main-section  today">
+                <h2>Today</h2>
+                    <div class="highlights coming-soon">
+                        <div class="highlight1">
+                            <b>Balan: </b> Politi kl.1500 @Maryan
+                        </div>  
+                        <div class="highlight1">
+                            <b>Balan: </b> Politi kl.1500 @Maryan
+                        </div>  
+                    </div>
+            </div>
+
+            <div class="main-section hero-action meal-plan">
+                    <div>Meal plan</div>
+                <i class="fa-solid fa-utensils action-icon"></i>
+            </div>
         </div>
 
 
@@ -51,11 +114,23 @@
         </div>
 
         <div class="family-list">
-            <div class="family-member">Xamdi</div>
-            <div class="family-member">Xamdi</div>
-            <div class="family-member">Xamdi</div>
-            <div class="family-member">Xamdi</div>
-        </div>
+                
+                <!-- Mini modal add family member -->
+         </div>
+            <button class="open-add-member">Add member</button>
+            <div  class="modal-mini hidden">
+
+                <div class="modal-mini-header">
+                    <div class="modal-mini-header">Add member</div>
+                    <div class="close-add-member">X</div>
+
+                </div>
+
+                <form action="#">
+                    <input class="member-name" name="member-name" type="text">
+                    <button class="add-member-btn" type="submit">Add</button>
+                </form>
+            </div>
 
     </div>
     <div class="modal modal-home hidden">
@@ -65,13 +140,139 @@
             <div class="modal-close-btn">X</div>
         </div>
 
-      
+      <div class="wifi-info">
+            <p>Wifi password: </p>
+            <p>dynamicsocks584</p>
+      </div>
 
     </div>
-    <div class="modal modal-shopping hidden">
+    <div class="modal modal-shopping">
 
         <div class="modal-header">
             <div class="modal-title">Shopping</div>
+            <div class="modal-close-btn">X</div>
+        </div>
+
+
+       <div class="shopping-action">
+        <button class="new-item-btn modal-btn">New item</button>
+        <button class="shop-btn modal-btn">Shop</button>
+       </div>
+
+       <div class="lists">
+
+     <div class="week-list list">
+            <div class="list-items-count"></div>
+            <div class="list-title">Week List</div>
+            <div class="list-desc"></div>
+            
+            <div class="list-items hidden">
+              <div class="list-item">Egg <i class="fa-solid fa-trash"></i></div>
+                <!-- <div class="list-item">Ost <i class="fa-solid fa-trash"></i></div>
+                <div class="list-item">Ost <i class="fa-solid fa-trash"></i></div>  -->
+
+            </div>
+            <div class="lists-action">
+                <p class="shop-list">Shop</p>
+                <p class="add-more">Add more</p>
+            </div>
+            <div class="expand-list"><i class="fa-solid fa-angle-right"></i></div>
+      </div>
+
+     <div class="month-list list">
+            <div class="list-items-count"></div>
+            <div class="list-title">Month List</div>
+            <div class="list-desc"></div>
+            
+            <div class="list-items hidden">
+              <!-- <div class="list-item">Egg <i class="fa-solid fa-trash"></i></div> -->
+              
+
+            </div>
+            <div class="lists-action">
+                <p class="shop-list">Shop</p>
+                <p class="add-more">Add more</p>
+            </div>
+            <div class="expand-list"><i class="fa-solid fa-angle-right"></i></div>
+      </div>
+     
+
+       </div>
+
+
+       <div class="modal-mini add-item hidden">
+        <div>
+
+            <h3>New item</h3>
+            <p class="close-add-item">X</p>
+        </div>
+
+        <form action="#">
+            <div>
+
+                <label for="item-name">Name: </label>
+                <input type="text" id="item-name" name="name">
+            </div>
+            <div >
+
+                <label for="quantity">Quantity: </label>
+                <p id="quantity-controller" class="quantity-controller">
+
+                    <span class="less">-</span>
+                    <span id="quantity" class="quantity-box">2</span>
+                    <span class="more">+</span>
+                </p>
+            </div>
+            <div>
+
+                <label for="description">description</label>
+                <input type="text" name="description" id="description">
+            </div>
+            <div>
+
+                <label for="list-type">List</label>
+                <select name="" id="list-type">
+                    <option value="week">week</option>
+                    <option value="Month">Month</option>
+                </select>
+            </div>
+            <div>
+
+                <label for="estimated-cost">Estimated cost</label>
+                <div id="estimated-cost">318,89 NOK</div>
+            </div>
+
+            <button type="submit">Add to the list</button>
+        </form>
+
+       </div>
+
+
+       <div class="shop modal-mini hidden">
+        <div class="modal-mini-header">
+
+            <h3>Shop the list</h3>
+            <p class="close-shop">X</p>
+        </div>
+        <form action="#">
+            <label for="shopper">Shopper</label>
+            <select name="shopper" id="shopper">
+                <!-- <option value="john">John</option> -->
+                <!-- <option value="sam">Sam</option>
+                <option value="mary">Mary</option>
+                <option value="peter">Peter</option> -->
+            </select>
+
+            <button type="submit">Send list</button>
+        </form>
+       </div>
+      
+
+    </div>
+    <div class="modal modal-reminder hidden">
+
+        <div class="modal-header">
+            <div class="modal-title">Reminders</div>
             <div class="modal-close-btn">X</div>
         </div>
 
@@ -81,6 +282,8 @@
 
     </div>
 
+   
     <script src="index.js" type="module"></script>
+    <script src="https://kit.fontawesome.com/b2cc293244.js" crossorigin="anonymous"></script>
 </body>
 </html>
