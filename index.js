@@ -6,11 +6,13 @@ const temperature = document.querySelector(".weather-temperature")
 const closeModalBtn = document.querySelectorAll(".modal-close-btn")
 const familyModal = document.querySelector(".modal-family")
 const homeModal = document.querySelector(".modal-home")
+const travelModal = document.querySelector(".modal-travel")
 const shoppingModal = document.querySelector(".modal-shopping")
 const reminderModal = document.querySelector(".modal-reminder")
 const familyBtn = document.querySelector(".btn-family")
 const HomeBtn = document.querySelector(".btn-home")
 const shoppingBtn = document.querySelector(".shopping-btn")
+const travelBtn = document.querySelector(".bus")
 const reminderBtn = document.querySelector(".reminder-btn")
 const openAddMember = document.querySelector(".open-add-member")
 const addMemberModal = document.querySelector(".modal-mini")
@@ -30,7 +32,7 @@ const addMoreBtns = document.querySelectorAll(".add-more")
 const closeShopBtn = document.querySelector(".close-shop")
 const shopList = document.querySelector(".shop-list")
 const shopperListOption = document.querySelector(".shop select")
-
+const busstopOption  = document.getElementById("busstop-option")
 
 
 
@@ -45,6 +47,9 @@ const state = {
             week:[{name:"Ost", quantity:2}, {name:"Egg", quantity:1, description:"Mida box ga"}, {name:"Canbo", quantity:3}, {name:"Eple", quantity:4}],
             month:[{name:"Hvetemel", quantity:20}]
         }
+    },
+    travel:{
+        busstop: "41800"
     }
 }
 
@@ -160,7 +165,7 @@ async function getWeatherData(city){
     fetch(link).then(res=> res.json().then(data=>{
         console.log(data)
         const weatherNow = Math.round((data.main.temp))-273
-        temperature.textContent = weatherNow+" "+"℃";
+        temperature.textContent = "Idag: "+weatherNow+" "+"℃";
     
 
         
@@ -172,7 +177,11 @@ async function getWeatherData(city){
     
     
     fetch(forcast).then(res=>res.json()).then(data=>{
-        
+
+
+
+       
+
         const hour = new Date().getHours()
         
         // Slice up the two thr next days data
@@ -201,8 +210,22 @@ async function getWeatherData(city){
 window.addEventListener("load", function(e){
 
     // Load weather data
-    
 
+
+    // setTimeout(() => {
+        
+    //     getBusstopData(state.travel.busstop)
+    // }, 60000);
+    
+    let date = new Date();
+    let sec = date.getSeconds();
+    setTimeout(()=>{
+        setInterval(()=>{
+            
+            getBusstopData(state.travel.busstop)
+        }, 60 * 1000);
+        }, (60 - sec) * 1000);
+    
     document.querySelectorAll(".coming-soon").forEach(el=> el.innerHTML="Coming soon")
     getWeatherData()
     UpdateListData()
@@ -317,7 +340,7 @@ shopList.addEventListener("click", function(e){
 
 })
 
-newItemBtn.addEventListener("click", openAddList)
+// newItemBtn.addEventListener("click", openAddList)
 closeAddItemBtn.addEventListener("click", closeAddItem)
 
 decreaseQuantity.addEventListener("click", function(e){
@@ -327,6 +350,10 @@ decreaseQuantity.addEventListener("click", function(e){
         updateQuantity(count)
     }
 })
+
+
+
+
 increaseQuantity.addEventListener("click", function(e){
     var count = Number(quantityBox.textContent.trim())
     count=count+1
@@ -446,6 +473,7 @@ shoppingBtn.addEventListener("click", function(){
 //     reminderModal.classList.remove("hidden")
 // })
 
+
 setInterval(()=>{
 
     displayDate()
@@ -463,3 +491,119 @@ function closeMiniModal(){
     
     
 }
+
+
+
+// Travel
+
+travelBtn.addEventListener("click", async function(e){
+    travelModal.classList.remove("hidden")
+
+    getBusstopData(state.travel.busstop)
+    
+})
+
+
+
+async function getBusstopData(stop){
+    
+    fetch(`https://mpolden.no/atb/v2/departures/${stop}?direction=inbound`).then(res=>res.json()).then(data=>{
+        console.log(data)
+        displayBusstopDataInbound(data.departures)
+    })
+
+    fetch(`https://mpolden.no/atb/v2/departures/${stop}?direction=outbound`).then(res=>res.json()).then(data=>{
+        console.log(data)
+        displayBusstopDataOutbound(data.departures)
+    })
+    
+}
+
+function displayBusstopDataInbound(departures){
+    departures=departures.slice(1,10)
+
+    const html = departures.map(el=>{
+        const now = new Date()
+        const date = new Date(el.scheduledDepartureTime)
+  
+        let isNow = false
+        if(((now.getHours())===(date.getHours())) && ((date.getMinutes())-(now.getMinutes()))<=10){
+            console.log("isnow")
+            isNow = true
+        }
+        
+
+
+        let hour = formating(date.getHours());
+        let mins = date.getMinutes()
+
+
+
+        function getTimeTravel(){
+            let time;
+            isNow?(date.getMinutes()-now.getMinutes())+" mins":hour+":"+formating(mins)
+            console.log((date.getMinutes()-now.getMinutes()))
+
+            if(isNow && (date.getMinutes()-now.getMinutes())==0 || isNow && (date.getMinutes()-now.getMinutes())<1){
+                
+                time = "now"
+            }else  if(isNow){
+                time = (date.getMinutes()-now.getMinutes())+" mins"
+            }else{
+                time=hour+":"+formating(mins)
+            }
+            console.log(time)
+            return time;
+        }
+        
+
+        return `<li class="${isNow && "now"}"><span class="line">${el.line}    <span class="destination">${el.destination}</span></span> <span class="time">${getTimeTravel()}</span></li>`
+    }).join(" ")
+
+    document.querySelector(".busstop-table .from-centre ul").innerHTML = ""
+    document.querySelector(".busstop-table .from-centre ul").insertAdjacentHTML("afterbegin", html)
+
+}
+function displayBusstopDataOutbound(departures){
+    departures=departures.slice(1,10)
+
+    const html = departures.map(el=>{
+
+        const now = new Date()
+        const date = new Date(el.scheduledDepartureTime)
+  
+        let isNow = false
+        if(((now.getHours())===(date.getHours())) && ((date.getMinutes())-(now.getMinutes()))<=10){
+            console.log("isnow")
+            isNow = true
+        }
+        
+
+
+        let hour = formating(date.getHours());
+        let mins = date.getMinutes()
+        
+
+        return `<li class="${isNow && "now"}"><span class="line">${el.line}    <span class="destination">${el.destination}</span></span> <span class="time">${isNow?(date.getMinutes()-now.getMinutes())+" mins":hour+":"+formating(mins)}</span></li>`
+    }).join(" ")
+
+    document.querySelector(".busstop-table .to-centre ul").innerHTML = ""
+    document.querySelector(".busstop-table .to-centre ul").insertAdjacentHTML("afterbegin", html)
+
+}
+
+busstopOption.addEventListener("change", function(e){
+    console.log(e.target.value)
+
+    state.travel.busstop=e.target.value.trim()
+
+    getBusstopData(state.travel.busstop)
+
+
+})
+
+
+
+fetch("http://cors-anywhere.com/stoppested.entur.org/?stopPlaceId=NSR:StopPlace:41587").then(res=>res.json()).then(data=>{
+    console.log(data)
+})

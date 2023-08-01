@@ -44,14 +44,14 @@
                 </div>
             </div>
             <div class="main-section shopping-btn  hero-action shopping">
-                    <div>Shopping</div> 
                 <i class="fa-solid fa-cart-shopping action-icon"></i> 
+                    <div>Shopping</div> 
               
             </div>
             <div class="main-section calender-btn calender hero-action">
 
+                <i class="fa-solid fa-calendar-days action-icon"></i>
                <div>Calender</div>
-               <i class="fa-solid fa-calendar-days action-icon"></i>
             </div>
 
             <div class="main-section the-family">
@@ -84,6 +84,10 @@
                     <div class="salah1">Dhuhur <div class="salah1-adan">1500</div> <div class="salah1-iqamah">1510</div> </div>
                 </div>
             </div>
+            <div class="main-section bus hero-action">
+                <i class="fa-solid fa-bus fa-xl"></i>
+                <div>Travel</div>
+            </div>
 
             <div class="main-section  today">
                 <h2>Today</h2>
@@ -98,8 +102,8 @@
             </div>
 
             <div class="main-section hero-action meal-plan">
-                    <div>Meal plan</div>
                 <i class="fa-solid fa-utensils action-icon"></i>
+                    <div>Recipes</div>
             </div>
         </div>
 
@@ -146,7 +150,7 @@
       </div>
 
     </div>
-    <div class="modal modal-shopping">
+    <div class="modal modal-shopping hidden">
 
         <div class="modal-header">
             <div class="modal-title">Shopping</div>
@@ -154,10 +158,10 @@
         </div>
 
 
-       <div class="shopping-action">
+       <!-- <div class="shopping-action">
         <button class="new-item-btn modal-btn">New item</button>
         <button class="shop-btn modal-btn">Shop</button>
-       </div>
+       </div> -->
 
        <div class="lists">
 
@@ -276,6 +280,53 @@
             <div class="modal-close-btn">X</div>
         </div>
 
+      
+
+    </div>
+    <div class="modal modal-travel hidden">
+
+        <div class="modal-header">
+            <div class="modal-title">Travel</div>
+            <div class="modal-close-btn">X</div>
+        </div>
+        <div class="travel-content">
+
+            <form action="#">
+                <h4>Choose departure busstop</h4>
+
+                <select name="busstop-option" id="busstop-option">
+                    <option value="41800">Rostengrenda</option>
+                    <option value="41613">Prinsens gate</option>
+                    <option value="61276">Tonstadkrysset</option>
+                </select>
+            </form>
+            
+            <div class="busstop-table">
+                <div class="to-centre">
+                        <h3>To the centre</h3>
+                        <ul>
+                            <!-- <li><span class="line">1 <span class="destination">Kattem via Tiller-Heimdal</span></span> <span class="time">11:18</span></li> 
+                            <li><span class="line">1 <span class="destination">Kattem via Tiller-Heimdal</span></span> <span class="time">11:18</span></li> 
+                            <li><span class="line">1 <span class="destination">Kattem via Tiller-Heimdal</span></span> <span class="time">11:18</span></li>  -->
+                       
+                        </ul>
+                        
+                        
+                    </div>
+                    <div class="centre"></div>
+                    <div class="from-centre">
+                        <h3>From the centre</h3>
+                        
+                    <ul>
+                        <!-- <li><span class="line">1 <span class="destination">Kattem via Tiller-Heimdal</span></span> <span class="time">11:18</span></li> 
+                        <li><span class="line">1 <span class="destination">Kattem via Tiller-Heimdal</span></span> <span class="time">11:18</span></li> 
+                        <li><span class="line">1 <span class="destination">Kattem via Tiller-Heimdal</span></span> <span class="time">11:18</span></li> 
+                        <li><span class="line">1 <span class="destination">Kattem via Tiller-Heimdal</span></span> <span class="time">11:18</span></li>  -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
       
 
     </div>
