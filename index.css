@@ -3,7 +3,7 @@ body{
     margin:0;
     padding:0;
     color:white;
-    font-size: 16px;
+    font-size: 21px;
 }
 
 
@@ -29,6 +29,10 @@ nav{
     align-items: center;
 }
 
+.nav-item{
+    padding: 50px;
+}
+
 .date{
     display: flex;
     align-items: center;
@@ -42,6 +46,9 @@ nav .date{
 .date-hour{
     margin-right: 20px;
     font-size: 50px;
+}
+.date-day{
+    font-weight: bold;
 }
 
 main{
@@ -210,6 +217,8 @@ option{
     display: flex;
     width: 100%;
     height: 170px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
 
 }
 .row2{
@@ -217,6 +226,7 @@ option{
     display: flex;
     width: 100%;
     height: 150px;
+    flex-wrap: wrap;
 
 }
 
@@ -270,21 +280,32 @@ option{
     border-style: none;
     background-color: #334756;
     color: #FFEBA1;
-    padding: 7px;
+    padding: 15px;
     border-radius: 2px;
     
 }
 
 .nav-items{
-    margin-right: 10%;
+    margin-right: 8%;
 }
 
 .salah{
     width: 13%;
     
     display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around;
 
+    font-size: 20px;
 
+    height: 100%;
+
+}
+
+.current-salah{
+    color: #FFEBA1;
+    font-size: 30px;
 }
 
 .bus{
@@ -295,13 +316,13 @@ option{
     width: 38%;
 }
 
-.salah>*{
-    display: flex;
-    flex-direction: column;
-}
+
 
 .weather{
     width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 .meal-plan{
     width: 13%;
@@ -545,6 +566,7 @@ margin: 10px;
     margin: 0 10px;
     /* background-color: red; */
     align-items: center;
+    margin-left: 36%;
     
 }
 
@@ -571,24 +593,21 @@ margin: 10px;
 }
 
 .to-centre{
+    text-align: center;
     min-width: 50%;
     display: flex;
     flex-direction: column;
 }
 
 .from-centre{
+    text-align: center;
     display: flex;
     flex-direction: column;
     min-width: 50%;
-    margin-left: 20px;
     /* border-left: 0.5px solid white; */
 }
 
-.centre{
-    width: 20px;
-    height: 100%;
-    background-color: white;
-}
+
 
 
 .busstop-table ul li{
@@ -612,3 +631,67 @@ margin: 10px;
 .now{
     color: #FFEBA1;
 }
+
+
+
+  .highlight{
+    animation-name: slideUp;
+    animation-duration: 4s;
+    animation-timing-function: ease-in;
+  }
+
+  @keyframes slideUp {
+    0%,
+    50% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+     
+    60%,
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    
+    }
+  }
+
+
+  .salah{
+    font-size: 30px;
+  }
+
+  .salah-table{
+    font-weight: 100;
+    width: 70%;
+
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    height: max-content;
+    margin-top: 20px;
+    font-size: 30px;
+  }
+
+  .salah-table table{
+    padding: 20px;
+    width: 90%;
+  }
+
+  .salah-table tr,td,th{
+    margin: 20px;
+    border-bottom:2px solid #d3d0d0;
+    border-collapse: collapse;
+    padding: 10px;
+  }
+
+
+  .current{
+    color:#FFEBA1;
+    font-weight: bold;
+  }
+
+
+  .bold{
+    font-weight: bold;
+  }

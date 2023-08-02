@@ -1,3 +1,8 @@
+import prayTimes from './PrayTimes.js'
+const prayerResults = prayTimes.getTimes((new Date()), ["63.446827", '10.421906'])
+console.log(prayerResults)
+
+
 // DOM
 const hourBox = document.querySelector(".date-hour")
 const monthBox = document.querySelector(".date-month")
@@ -8,6 +13,8 @@ const familyModal = document.querySelector(".modal-family")
 const homeModal = document.querySelector(".modal-home")
 const travelModal = document.querySelector(".modal-travel")
 const shoppingModal = document.querySelector(".modal-shopping")
+const opensalahModal = document.querySelector(".salah")
+
 const reminderModal = document.querySelector(".modal-reminder")
 const familyBtn = document.querySelector(".btn-family")
 const HomeBtn = document.querySelector(".btn-home")
@@ -33,6 +40,7 @@ const closeShopBtn = document.querySelector(".close-shop")
 const shopList = document.querySelector(".shop-list")
 const shopperListOption = document.querySelector(".shop select")
 const busstopOption  = document.getElementById("busstop-option")
+const familyScreen = document.querySelector(".family-screen")
 
 
 
@@ -40,7 +48,7 @@ const state = {
 
     family:{
         members:[],
-        highlights:[]
+        highlights:[{name:"John's birthday today!"},{name:"Family Dinner next week"}, {name:"Keep going you can"}]
     },
     shopping:{
         lists:{
@@ -50,8 +58,94 @@ const state = {
     },
     travel:{
         busstop: "41800"
+    },
+    prayers:{
+        times: prayTimes.getTimes((new Date()), ["63.446827", '10.421906']),
+        // times: {
+        //     asr:"19:52",
+        //     dhuhr:"19:54",
+        //     fajr:"03:30",
+        //     isha:"23:08",
+        //     maghrib:"20:14",
+        //     midnight:"19:24",
+        //     sunrise:"19:53",
+        //     sunset:"22:14"
+        // },
+        currentPrayer:[]
     }
 }
+
+
+
+function calculateIqamah(athan){
+    // 23:08
+
+    let hour = Number(athan.split(":")[0])
+    let mins = Number(athan.split(":")[1])
+
+    let rem=0;
+
+    if((60-mins)>10){
+            mins+=10
+    }else if((60-mins)==10){
+        hour++
+        mins=0
+    } else if((60-mins)<10){
+        hour++
+        mins= rem+(60-mins)
+    }
+
+
+    return `${formating(hour)}:${formating(mins)}`
+
+}
+
+
+function calculateCurrentPrayer(){
+
+    const now  = new Date()
+
+    const hour = formating(now.getHours())
+    const mins = formating(now.getMinutes())
+
+    console.log("-------------")
+    console.log(hour)
+
+    var result = Object.keys(state.prayers.times).map((key) => [key, state.prayers.times[key]]);
+    console.log(result)
+
+
+    console.log()
+
+    // 1/7
+    // DETERMINE CURRENT SALAH
+    var salahList = []
+    for(let i=0; i<result.length; i++){
+        console.log(result[i][1])
+        // Get the hour to determine which salah is near
+        const salahHour = Number(result[i][1].split(":")[0])
+        salahList.push(salahHour)
+
+    }
+
+
+        const goal = hour;
+
+        var closest = salahList.reduce(function(prev, curr) {
+        return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
+        });
+
+
+        // get the index of current salah 
+        const currentSalahIndex = salahList.indexOf(closest)
+
+        // Update current salah in the state
+
+        state.prayers.currentPrayer = result[currentSalahIndex]
+
+        return result[currentSalahIndex][0]
+}
+
 
 
 
@@ -115,13 +209,12 @@ function formating(input){
 
 function displayDate(){
 
-    const {date, hour, min, sec, month} = getNowDate()
+    const {date, hour, min, day, sec, month} = getNowDate()
 
 
     hourBox.textContent = hour+":"+min;
-    monthBox.textContent = monthArray[month]
-    dayBox.textContent = date
-
+    monthBox.textContent =date+ ". "+ monthArray[month]
+    dayBox.textContent = days[day]+ ","
 
 
 
@@ -205,17 +298,25 @@ async function getWeatherData(city){
 }
 
 
+let highlightsCount = 0;
+setInterval(function(){
+    const highlights = state.family.highlights;
+
+    familyScreen.innerHTML =""
+    familyScreen.insertAdjacentHTML("afterbegin", `<span class="highlight">${highlights[highlightsCount].name}</span>`)
+    if(highlightsCount==highlights.length-1){
+        highlightsCount=0
+    }else{
+        highlightsCount++
+    }
+    console.log(highlightsCount)
+}, 10000)
+
+
 //Events
 
 window.addEventListener("load", function(e){
 
-    // Load weather data
-
-
-    // setTimeout(() => {
-        
-    //     getBusstopData(state.travel.busstop)
-    // }, 60000);
     
     let date = new Date();
     let sec = date.getSeconds();
@@ -226,11 +327,12 @@ window.addEventListener("load", function(e){
         }, 60 * 1000);
         }, (60 - sec) * 1000);
     
-    document.querySelectorAll(".coming-soon").forEach(el=> el.innerHTML="Coming soon")
     getWeatherData()
     UpdateListData()
     document.querySelector(".list-items-count").textContent= state.shopping.lists.week.length +" "+"Items";
     deleteItemEvent()
+    calculateCurrentPrayer()
+    displayCurrentSalah()
 })
 
 
@@ -352,7 +454,14 @@ decreaseQuantity.addEventListener("click", function(e){
 })
 
 
-
+function displayCurrentSalah(){
+    let [salah, time] = state.prayers.currentPrayer
+    salah  = salah.charAt(0).toUpperCase() + salah.slice(1);
+    document.querySelector(".current-salah").innerHTML=""
+    document.querySelector(".current-salah").insertAdjacentHTML('afterbegin', `<i class="fa-solid fa-mosque"></i> ${salah}`)
+    document.querySelector(".salah-in").innerHTML=""
+    document.querySelector(".salah-in").textContent="Adhan at " + time
+}
 
 increaseQuantity.addEventListener("click", function(e){
     var count = Number(quantityBox.textContent.trim())
@@ -413,6 +522,39 @@ AddMemberBtn.addEventListener("click", function(e){
     updateMemberList()
 })
 
+
+opensalahModal.addEventListener("click", function(e){
+    document.querySelector(".modal-salah").classList.remove("hidden")
+    displaySalahtable()
+})
+
+function displaySalahtable(){
+
+    var result = Object.keys(state.prayers.times).map((key) => [key, state.prayers.times[key]]);
+
+    let html = result.map((el,i)=>{
+        if(el[0].toLowerCase()!="imsak" && el[0].toLowerCase()!="sunrise"&&el[0].toLowerCase()!="midnight" && el[0].toLowerCase()!="sunset"){
+            console.log(el[0].toLowerCase()=="imsak")
+            
+            return `<tr class="${el[0]==calculateCurrentPrayer()?"current":""}">
+            <td>${el[0].toUpperCase()}</td>
+            <td>${el[1]}</td>
+            <td>${calculateIqamah(el[1])}</td>
+            </tr>`
+        }else{
+            return ''
+        }
+    }).join(" ")
+
+
+    html = `<tr>
+    <th>Salah</th>
+    <th>Adhan</th>
+    <th>Iqamah</th>
+ </tr>`+html
+    document.querySelector(".salah-table table").innerHTML=""
+    document.querySelector(".salah-table table").insertAdjacentHTML(`afterbegin`, html)
+}
 
 function openAddList(e){
     addItemModal.classList.remove("hidden")
@@ -574,7 +716,6 @@ function displayBusstopDataOutbound(departures){
   
         let isNow = false
         if(((now.getHours())===(date.getHours())) && ((date.getMinutes())-(now.getMinutes()))<=10){
-            console.log("isnow")
             isNow = true
         }
         
@@ -593,7 +734,6 @@ function displayBusstopDataOutbound(departures){
 }
 
 busstopOption.addEventListener("change", function(e){
-    console.log(e.target.value)
 
     state.travel.busstop=e.target.value.trim()
 
@@ -604,6 +744,9 @@ busstopOption.addEventListener("change", function(e){
 
 
 
-fetch("http://cors-anywhere.com/stoppested.entur.org/?stopPlaceId=NSR:StopPlace:41587").then(res=>res.json()).then(data=>{
-    console.log(data)
+fetch("https://time.my-masjid.com/timingscreen/46c50796-75af-4b82-a501-224506680f66").then(res=>{
+    console.log(res)
+}).then(data=>{
+    // console.log(data.times)
 })
+

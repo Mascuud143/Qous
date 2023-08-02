@@ -24,9 +24,9 @@
         </div>
 
         <div class="nav-items">
-            <button class="nav-item btn-home"><i class="fa-solid fa-house"></i> Gurigga</button>
-            <button class="nav-item btn-family"><i class="fa-solid fa-users"></i> Qoyska</button>
-            <button class="nav-item">QOUS</button>
+            <button class="nav-item btn-home"><i class="fa-solid fa-house"></i> The Home</button>
+            <button class="nav-item btn-family"><i class="fa-solid fa-users"></i> The Family</button>
+            <button class="nav-item"><i class="fa-solid fa-gear"></i> QOUS</button>
         </div>
     </nav>       
 
@@ -69,20 +69,17 @@
                         <img src="https://xsgames.co/randomusers/assets/avatars/female/32.jpg" alt="">
                     </div>
                 </div>
-                <div class="family-screen">It's Mary's birthday!</div>
+                <div class="family-screen"></div>
             </div>
         </div>
         <div class="row2">
-            <div class="main-section coming-soon salah">
-                <h3>Salah</h3>
-                <div class="current-salah">
-                    Fajr <div class="current-salah-adan">1300</div>
-                </div>
-                <div class="salah-table">
-                    <div class="salah1">Dhuhur <div class="salah1-adan">1500</div> <div class="salah1-iqamah">1510</div> </div>
-                    <div class="salah1">Dhuhur <div class="salah1-adan">1500</div> <div class="salah1-iqamah">1510</div> </div>
-                    <div class="salah1">Dhuhur <div class="salah1-adan">1500</div> <div class="salah1-iqamah">1510</div> </div>
-                </div>
+            <div class="main-section salah hero-action">
+                <!-- <div class="current-salah"><i class="fa-solid fa-mosque"></i> Casir</div> -->
+                <div class="current-salah"></div>
+                <div class="salah-in"></div>
+                <!-- <div class="salah-in">Aadaan in 1 hour 58 mins</div> -->
+                <!-- <div class="salah-time">17:02</div> -->
+                
             </div>
             <div class="main-section bus hero-action">
                 <i class="fa-solid fa-bus fa-xl"></i>
@@ -92,12 +89,12 @@
             <div class="main-section  today">
                 <h2>Today</h2>
                     <div class="highlights coming-soon">
-                        <div class="highlight1">
+                        <!-- <div class="highlight1">
                             <b>Balan: </b> Politi kl.1500 @Maryan
                         </div>  
                         <div class="highlight1">
                             <b>Balan: </b> Politi kl.1500 @Maryan
-                        </div>  
+                        </div>   -->
                     </div>
             </div>
 
@@ -116,25 +113,51 @@
             <div class="modal-title">Qoyska</div>
             <div class="modal-close-btn">X</div>
         </div>
-
+        
         <div class="family-list">
+            
+            <!-- Mini modal add family member -->
+        </div>
+        <button class="open-add-member">Add member</button>
+        <div  class="modal-mini hidden">
+            
+            <div class="modal-mini-header">
+                <div class="modal-mini-header">Add member</div>
+                <div class="close-add-member">X</div>
                 
-                <!-- Mini modal add family member -->
-         </div>
-            <button class="open-add-member">Add member</button>
-            <div  class="modal-mini hidden">
-
-                <div class="modal-mini-header">
-                    <div class="modal-mini-header">Add member</div>
-                    <div class="close-add-member">X</div>
-
-                </div>
-
-                <form action="#">
-                    <input class="member-name" name="member-name" type="text">
-                    <button class="add-member-btn" type="submit">Add</button>
+            </div>
+            
+            <form action="#">
+                <input class="member-name" name="member-name" type="text">
+                <button class="add-member-btn" type="submit">Add</button>
                 </form>
             </div>
+            
+        </div>
+        <div class="modal modal-salah hidden">
+        <div class="modal-header">
+            <div class="modal-title">Salah</div>
+            <div class="modal-close-btn">X</div>
+
+
+        </div>
+        <div class="salah-table">
+            <table >
+                <!-- <tr>
+                   <th>Salah</th>
+                   <th>Adhan</th>
+                   <th>Iqamah</th>
+                </tr> -->
+                
+                <!-- <tr>
+                   <td>Fajar</td>
+                   <td>03:24</td>
+                   <td>03:34</td>
+                </tr> -->
+             </table>
+        </div>
+
+
 
     </div>
     <div class="modal modal-home hidden">
@@ -292,18 +315,26 @@
         <div class="travel-content">
 
             <form action="#">
-                <h4>Choose departure busstop</h4>
+                <h2>Choose departure busstop</h2>
 
                 <select name="busstop-option" id="busstop-option">
                     <option value="41800">Rostengrenda</option>
                     <option value="41613">Prinsens gate</option>
                     <option value="61276">Tonstadkrysset</option>
                 </select>
+
+
+
+
+
+
+
+
             </form>
             
             <div class="busstop-table">
                 <div class="to-centre">
-                        <h3>To the centre</h3>
+                        <h3>To the sentrum</h3>
                         <ul>
                             <!-- <li><span class="line">1 <span class="destination">Kattem via Tiller-Heimdal</span></span> <span class="time">11:18</span></li> 
                             <li><span class="line">1 <span class="destination">Kattem via Tiller-Heimdal</span></span> <span class="time">11:18</span></li> 
@@ -315,7 +346,7 @@
                     </div>
                     <div class="centre"></div>
                     <div class="from-centre">
-                        <h3>From the centre</h3>
+                        <h3>From the sentrum</h3>
                         
                     <ul>
                         <!-- <li><span class="line">1 <span class="destination">Kattem via Tiller-Heimdal</span></span> <span class="time">11:18</span></li> 
