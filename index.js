@@ -275,19 +275,20 @@ async function getWeatherData(city){
 
        
 
-        const hour = new Date().getHours()
+        let hour = new Date().getHours()
         
         // Slice up the two thr next days data
-        const nextDays = data.list.slice((23-hour), (23-hour+24))
+        // const nextDays = data.list.slice((23-hour), (23-hour+24))
+        const nextDays = data.list
+        console.log(data.list)
         console.log(nextDays)
         
         
-        nextdays.day1.temp = Math.round(nextDays[5].main.temp)-273
-        nextdays.day2.temp = Math.round(nextDays[5+8].main.temp)-273
-        nextdays.day3.temp = Math.round(nextDays[5+16].main.temp)-273
-
-
-        console.log()
+        nextdays.day1.temp = Math.round(nextDays[12].main.temp)-273
+        console.log(nextDays.day1)
+        nextdays.day2.temp = Math.round(nextDays[12+10].main.temp)-273
+        nextdays.day3.temp = Math.round(nextDays[12+20].main.temp)-273
+10
         
         document.querySelector(".day1").innerHTML = getNextDays()[0]+`<span>${nextdays.day1.temp} ℃</span>`
         document.querySelector(".day2").innerHTML = getNextDays()[1]+`<span>${nextdays.day2.temp} ℃</span>`
@@ -587,10 +588,11 @@ function closeAddItem(){
 function getNextDays(){
 
     let date = new Date().getDay()
-
-    if(date==4){
-    }
-    return [days[date+1], days[date+2], days[date+3]]
+    console.log("-----------DATES")
+   console.log(date+1)
+   console.log(date+2)
+   console.log(date+3)
+    return [days[date+1], days[date+2], (date+3<=6?days[date+3]:days[0])]
 }
 
 
