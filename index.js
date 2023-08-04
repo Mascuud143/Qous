@@ -48,7 +48,7 @@ const state = {
 
     family:{
         members:[],
-        highlights:[{name:"John's birthday today!"},{name:"Family Dinner next week"}, {name:"Keep going you can"}]
+        highlights:[{name:"John's birthday today!"},{name:"Family Dinner next week"}, {name:"Keep going you can 😍"}]
     },
     shopping:{
         lists:{
@@ -79,7 +79,6 @@ const state = {
 
 function calculateIqamah(athan){
     // 23:08
-
     let hour = Number(athan.split(":")[0])
     let mins = Number(athan.split(":")[1])
 
@@ -290,9 +289,9 @@ async function getWeatherData(city){
         nextdays.day3.temp = Math.round(nextDays[12+20].main.temp)-273
 10
         
-        document.querySelector(".day1").innerHTML = getNextDays()[0]+`<span>${nextdays.day1.temp} ℃</span>`
-        document.querySelector(".day2").innerHTML = getNextDays()[1]+`<span>${nextdays.day2.temp} ℃</span>`
-        document.querySelector(".day3").innerHTML = getNextDays()[2]+`<span>${nextdays.day3.temp} ℃</span>`
+        document.querySelector(".day1").innerHTML = getNextDays()[0]+`<span class="">${nextdays.day1.temp} ℃</span>`
+        document.querySelector(".day2").innerHTML = getNextDays()[1]+`<span class="">${nextdays.day2.temp} ℃</span>`
+        document.querySelector(".day3").innerHTML = getNextDays()[2]+`<span class="">${nextdays.day3.temp} ℃</span>`
 
     })
 
@@ -588,11 +587,27 @@ function closeAddItem(){
 function getNextDays(){
 
     let date = new Date().getDay()
-    console.log("-----------DATES")
-   console.log(date+1)
-   console.log(date+2)
-   console.log(date+3)
-    return [days[date+1], days[date+2], (date+3<=6?days[date+3]:days[0])]
+
+
+   // Calc the days
+   let day1 = IslastDay(date)
+   let day2 = IslastDay(day1)
+   let day3 = IslastDay(day2)
+
+
+    // check is if is last day
+   function IslastDay(day){
+    
+        if(day==6){
+            return 0
+        }else{
+            return day=day+1;
+        }
+   }
+
+
+
+    return [days[day1], days[day2], days[day3]]
 }
 
 

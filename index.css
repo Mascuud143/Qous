@@ -1,9 +1,13 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
 body{
     box-sizing: border-box;
     margin:0;
     padding:0;
     color:white;
     font-size: 21px;
+    /* font-family: "lato"; */
 }
 
 
@@ -67,6 +71,12 @@ main{
 
 .next-days{
     display: flex;
+    width: 90%;
+    justify-content: space-evenly;
+}
+
+.day1{
+    align-self: flex-start;
 }
 
 .location{
@@ -695,3 +705,19 @@ margin: 10px;
   .bold{
     font-weight: bold;
   }
+
+  footer{
+    position: absolute;
+    bottom: 20px;
+}
+
+.light{
+    font-weight: 100;
+}
+
+.location{
+    color: #FFEBA1;
+}
+.weather-temperature{
+    color: #FFEBA1;
+}
