@@ -41,8 +41,8 @@ const shopList = document.querySelector(".shop-list")
 const shopperListOption = document.querySelector(".shop select")
 const busstopOption  = document.getElementById("busstop-option")
 const familyScreen = document.querySelector(".family-screen")
-
-
+const openRecipesModal = document.querySelector(".meal-plan")
+const searchRecipes = document.querySelector(".search-area form")
 
 const state = {
 
@@ -442,6 +442,13 @@ shopList.addEventListener("click", function(e){
 
 })
 
+
+
+openRecipesModal.addEventListener("click", function(){
+    document.querySelector(".modal-recipes").classList.remove("hidden")
+    console.log("hh")
+})
+
 // newItemBtn.addEventListener("click", openAddList)
 closeAddItemBtn.addEventListener("click", closeAddItem)
 
@@ -652,6 +659,10 @@ function closeMiniModal(){
 }
 
 
+// recipes
+
+searchRecipes.addEventListener("submit", loadRecipes)
+
 
 // Travel
 
@@ -760,10 +771,55 @@ busstopOption.addEventListener("change", function(e){
 })
 
 
+function loadRecipes(e){
+    e.preventDefault()
+    const search = document.querySelector(".search-area form input").value.trim()
 
-fetch("https://time.my-masjid.com/timingscreen/46c50796-75af-4b82-a501-224506680f66").then(res=>{
-    console.log(res)
-}).then(data=>{
-    // console.log(data.times)
-})
+    if(search.length!=0){
+        console.log(search)
+        
+        // fetch from the api
+        fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`).then(res=>res.json()).then(data=>{
+            console.log(data)
+            displayRecipeLists(data.meals)
+        })
+    }else{
+        alert("Please type in search!")
+    }
+}
+
+
+function displayRecipeLists(recipes){
+    document.querySelector(".recipes-list").innerHTML=""
+    let html =""
+    if(recipes){
+
+        html = recipes.map(el=>{
+            return `<div class="recipe">
+            <div class="recipe-image">
+            
+            <img src="${el.strMealThumb}" alt="meal">
+            </div>
+            <div class="recipe-details">
+            
+            <div class="recipe-name">${el.strMeal}</div>
+            <div class="recipe-action">
+            <button><i class="fa-regular fa-eye"></i> See recipe</button>
+            <button><i class="fa-regular fa-bookmark"></i> Save recipe</button>
+            </div>
+            </div>
+            </div>`
+        }).join(" ")
+
+        
+    }else{
+        html="Can't find meals or ingredients match! Try typing differently."
+    }
+    // display recipes
+
+    document.querySelector(".recipes-list").insertAdjacentHTML("afterbegin", html)
+
+}
+
+
 

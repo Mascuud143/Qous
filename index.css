@@ -721,3 +721,77 @@ margin: 10px;
 .weather-temperature{
     color: #FFEBA1;
 }
+
+.recipes-list{
+    margin-top: 20px;
+}
+
+.modal-recipes main{
+    display: flex;
+    flex-direction: row;
+    margin-top: 5%;
+}
+
+.search-area{
+
+}
+
+.search-area input{
+    padding: 10px;
+}
+
+.recipe{
+    color: #082032;
+    padding-bottom: 20px;
+    border-radius: 4px;
+    background-color: white;
+    width: 200px;
+    height: fit-content;
+    margin: 10px;
+}
+
+
+.recipe-details{
+    padding: 15px;
+
+
+}
+
+
+.recipe-action{
+    display: flex;
+}
+
+.recipe-action button{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.recipe-image{
+
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+
+.recipe-image img{
+    height: 100%;
+    width: 100%;
+}
+
+
+.recipes-list{
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.recipe-name{
+    padding: 10px 0px;
+}
