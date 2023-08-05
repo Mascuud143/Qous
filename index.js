@@ -72,6 +72,10 @@ const state = {
         //     sunset:"22:14"
         // },
         currentPrayer:[]
+    },
+    recipes:{
+        recipeList:[],
+        savedRecipes:[]
     }
 }
 
@@ -221,6 +225,9 @@ function displayDate(){
 
 
 async function getWeatherData(city){
+
+    // let lat = 63.4305;
+    // let long = 10.3951;
 
     let lat = 63.4305;
     let long = 10.3951;
@@ -446,7 +453,8 @@ shopList.addEventListener("click", function(e){
 
 openRecipesModal.addEventListener("click", function(){
     document.querySelector(".modal-recipes").classList.remove("hidden")
-    console.log("hh")
+    displaySavedRecipes()
+
 })
 
 // newItemBtn.addEventListener("click", openAddList)
@@ -782,6 +790,9 @@ function loadRecipes(e){
         fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`).then(res=>res.json()).then(data=>{
             console.log(data)
             displayRecipeLists(data.meals)
+
+            // Update state
+            state.recipes.recipeList = data.meals
         })
     }else{
         alert("Please type in search!")
@@ -795,7 +806,7 @@ function displayRecipeLists(recipes){
     if(recipes){
 
         html = recipes.map(el=>{
-            return `<div class="recipe">
+            return `<div class="recipe" data-id=${el.idMeal}>
             <div class="recipe-image">
             
             <img src="${el.strMealThumb}" alt="meal">
@@ -804,8 +815,8 @@ function displayRecipeLists(recipes){
             
             <div class="recipe-name">${el.strMeal}</div>
             <div class="recipe-action">
-            <button><i class="fa-regular fa-eye"></i> See recipe</button>
-            <button><i class="fa-regular fa-bookmark"></i> Save recipe</button>
+            <button class="see-recipe"><i class="fa-regular fa-eye"></i> See recipe</button>
+            <button class="save-recipe"><i class="fa-regular fa-bookmark"></i> Save recipe</button>
             </div>
             </div>
             </div>`
@@ -818,8 +829,111 @@ function displayRecipeLists(recipes){
     // display recipes
 
     document.querySelector(".recipes-list").insertAdjacentHTML("afterbegin", html)
+    saveRecipeListener()
 
 }
 
+
+function saveRecipeListener(){
+    document.querySelectorAll(".save-recipe").forEach(btn=>{
+        btn.addEventListener("click", saveRecipe)
+    })
+    
+    document.querySelectorAll(".fa-bookmark").forEach(btn=>{
+        btn.addEventListener("click", saveRecipe)
+        
+    })
+
+
+}
+
+
+function isSaved(id){
+
+   const saved =  state.recipes.savedRecipes.filter(el=> el.idMeal==id)
+    return saved.length !==0
+}
+
+
+
+function saveRecipe(e){
+    let recipeid = e.target.parentNode.parentNode.parentNode.dataset.id
+    const isChild = [...e.target.classList].includes("fa-bookmark")
+
+
+
+        console.log(e.target.classList)
+        // if recipe is already saved, just unsave it
+       console.log(isSaved(recipeid))
+       if(isSaved(recipeid)){
+        // remove from saved recipes
+        console.log(recipeid)
+            state.recipes.savedRecipes = state.recipes.savedRecipes.filter(el=> el.idMeal!==recipeid)
+            console.log(state.recipes.savedRecipes)
+            
+            // remove the styling
+            if(isChild){
+                e.target.classList.add("fa-solid")
+
+            }else{
+
+                e.target.classList.remove("saved")
+                e.target.classList.remove("saved")
+            }
+
+
+            displaySavedRecipes()
+       }else{
+
+           
+           
+           
+           
+        if(isChild){
+            recipeid= e.target.parentNode.parentNode.parentNode.parentNode.dataset.id
+            e.target.classList.add("fa-solid")
+        }else{
+            e.target.classList.add("saved")
+        }
+    console.log(state.recipes.recipeList)
+    
+    
+    
+    
+    
+   const savedRecipe = state.recipes.recipeList.filter(el=> el.idMeal==recipeid)
+   console.log(savedRecipe[0])
+   state.recipes.savedRecipes.push(savedRecipe[0])
+   displaySavedRecipes()
+   
+   
+   
+   // Change the icon to saved
+   console.log(e.target.classList)
+   
+   
+   // change styles
+}
+   
+
+}
+
+
+function displaySavedRecipes(){
+    console.log(state.recipes.savedRecipes)
+    if(state.recipes.savedRecipes.length<=0){
+
+        document.querySelector(".saved-recipe-list").textContent="No saved recipes currently!"
+        return
+    }
+    document.querySelector(".saved-recipe-list").innerHTML=""
+    const html = state.recipes.savedRecipes.map(el=>{
+        return `   <div  data-id=${el.idMeal} class="saved-recipe">
+        <div class="saved-recipe-name">${el.strMeal}</div>
+    </div>`
+    }).join(" ")
+
+    document.querySelector(".saved-recipe-list").insertAdjacentHTML("afterbegin", html)
+}
 
 
