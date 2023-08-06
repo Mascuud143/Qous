@@ -35,6 +35,7 @@ nav{
 
 .nav-item{
     padding: 50px;
+    border-radius: 5px;
 }
 
 .date{
@@ -217,8 +218,18 @@ option{
     width: 150px;
     height: 100%;
     border-style: none;
-    border-radius: 3px;
+    border-radius: 5px;
+
+    cursor: pointer;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
  
+}
+
+.hero-action:hover{
+    background-color: #FFEBA1;
+    color: #082032;
 }
 
 
@@ -249,12 +260,10 @@ option{
     border-radius: 5px;
     width: fit-content;
     height: 100%;
-    font-size: 20px;
     margin-right: 10px;
-    font-size: 21px;
-    background-color: #334756;
-
-    
+    font-size: 22px;
+   
+    border: .0001px solid #fdfdff42;
     
 }
 
@@ -291,8 +300,19 @@ option{
     background-color: #334756;
     color: #FFEBA1;
     padding: 15px;
-    border-radius: 2px;
+    border-radius: 5px;
+    cursor: pointer;
     
+}
+
+.nav-item:hover{
+    background-color: #FFEBA1;
+    color: #082032;
+}
+
+.nav-item:last-child{
+    background-color: #FFEBA1;
+    color: #082032;
 }
 
 .nav-items{
@@ -718,9 +738,7 @@ margin: 10px;
 .location{
     color: #FFEBA1;
 }
-.weather-temperature{
-    color: #FFEBA1;
-}
+
 
 .recipes-list{
     margin-top: 20px;
@@ -737,17 +755,29 @@ margin: 10px;
 }
 
 .search-area input{
-    padding: 10px;
+    padding: 15px;
+    min-width: 200px;
+    
+}
+
+.search-area button{
+
+    height: 45px;
+    width: 100px;
 }
 
 .recipe{
-    color: #082032;
+    color: #fdfeff;
     padding-bottom: 20px;
     border-radius: 4px;
-    background-color: white;
+    background-color: #334756;
     width: 200px;
     height: fit-content;
     margin: 10px;
+}
+
+.recipe:hover{
+    transform: scale(1.005);
 }
 
 
@@ -789,8 +819,14 @@ margin: 10px;
     height: 100%;
     width: 100%;
 
-    /* -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-  /* filter: grayscale(100%); */ 
+    /* -webkit-filter: grayscale(100%);  */
+    /* filter: grayscale(70%);  */
+    cursor: pointer;
+}
+
+.recipe-image img:hover{
+    -webkit-filter: grayscale(0%); 
+    filter: grayscale(0%);
 }
 
 
@@ -826,4 +862,30 @@ margin: 10px;
     background-color: #082032;
     color: white;
 }
+
+
+input{
+    background-color: #334756;
+    border: .5px solid #d3d0d0;
+    color: #fff;
+    border-radius: 5px;
+}
+
+button, select{
+    border-style: none;
+    padding: 7px;
+    border-radius: 5px;
+    background-color: #FFEBA1;
+    color: #334756;
+    cursor: pointer;
+    font-size: 15px;
+    transition: .1s ease-in;
+}
+
+button:hover{
+    background-color: #334756;
+    color: white;
+}
+
+
 
