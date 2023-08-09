@@ -891,17 +891,17 @@ button:hover{
 
 .recipe-details-modal{
     position: absolute;
-
+    position: fixed;
     background-color: #fdfeff;
     color: #082032;
-    padding: 20px;
+    padding: 25px;
     border-radius: 10px;
-
+    overflow: scroll;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-width: 90%;
-    min-height: 90%;
+    max-width: 55%;
+    max-height: 55%;
 }
 
 .recipe-details-modal header{
@@ -909,7 +909,11 @@ button:hover{
     justify-content: space-between;
     align-items: start;
 
-    width: 95%;
+    width: 100%;
+    color: white;
+    margin-bottom: 20px;
+    background-color: #082032;
+    padding: 10px;
 }
 
 .meal-title{
@@ -926,6 +930,8 @@ button:hover{
     width: 70%;
     justify-content: space-between;
     display: flex;
+    margin-top: 15px;
+    padding-left: 10px;
 }
 
 .instruction-number{
@@ -944,3 +950,19 @@ button:hover{
     border-left: 1px solid #082032;
     padding-left: -10px;
     }
+
+
+.recipe-video{
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        top: 100px;
+        border-radius: 5px;
+        right: 20px;
+        overflow: hidden
+}
+
+.recipe-video img{
+    width: 150px;
+    height: 150px;
+}

@@ -874,11 +874,30 @@ function seeRecipe(e){
     // Update the view
 
     const instructions = meal.strInstructions
-    console.log(instructions)
+    console.log(instructions.split("\n"))
 
-    document.querySelector(".meal-title").textContent = meal.strMeal
-    document.querySelector(".meal-origin").textContent = meal.strArea
-    // document.querySelector(".meal-origin").textContent = meal.strArea
+
+    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+    document.querySelector(".instructions").innerHTML = ""
+    const instructionsHtml = instructions.split("\n").map((el,i)=>{
+        return `<div class="instrction">
+        ${el}
+    </div>`
+    }).join(" ")
+
+    document.querySelector(".meal-title").innerHTML = ""
+    document.querySelector(".meal-title").innerHTML = "How to cook "+meal.strMeal
+    document.querySelector(".instructions").insertAdjacentHTML("afterbegin", instructionsHtml)
+
+   document.querySelector(".recipe-video img").src = meal.strMealThumb=""
+   console.log(state.recipes.recipeList)
+   
+   
+   // Get src img from the recipes list
+   const imgSrc = state.recipes.recipeList.filter(el=> el.idMeal==recipeid)
+   console.log(imgSrc[0])
+   document.querySelector(".recipe-video img").src = imgSrc[0].strMealThumb;
 
     })
 }
