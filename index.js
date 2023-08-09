@@ -1,6 +1,4 @@
 import prayTimes from './PrayTimes.js'
-const prayerResults = prayTimes.getTimes((new Date()), ["63.446827", '10.421906'])
-console.log(prayerResults)
 
 
 // DOM
@@ -14,7 +12,6 @@ const homeModal = document.querySelector(".modal-home")
 const travelModal = document.querySelector(".modal-travel")
 const shoppingModal = document.querySelector(".modal-shopping")
 const opensalahModal = document.querySelector(".salah")
-
 const reminderModal = document.querySelector(".modal-reminder")
 const familyBtn = document.querySelector(".btn-family")
 const HomeBtn = document.querySelector(".btn-home")
@@ -43,6 +40,9 @@ const busstopOption  = document.getElementById("busstop-option")
 const familyScreen = document.querySelector(".family-screen")
 const openRecipesModal = document.querySelector(".meal-plan")
 const searchRecipes = document.querySelector(".search-area form")
+const closeRecipeDetailsBtn = document.querySelector(".close-recipe-details") 
+
+
 
 const state = {
 
@@ -111,20 +111,16 @@ function calculateCurrentPrayer(){
     const hour = formating(now.getHours())
     const mins = formating(now.getMinutes())
 
-    console.log("-------------")
-    console.log(hour)
+  
 
     var result = Object.keys(state.prayers.times).map((key) => [key, state.prayers.times[key]]);
-    console.log(result)
 
 
-    console.log()
 
     // 1/7
     // DETERMINE CURRENT SALAH
     var salahList = []
     for(let i=0; i<result.length; i++){
-        console.log(result[i][1])
         // Get the hour to determine which salah is near
         const salahHour = Number(result[i][1].split(":")[0])
         salahList.push(salahHour)
@@ -262,7 +258,6 @@ async function getWeatherData(city){
       }
 
     fetch(link).then(res=> res.json().then(data=>{
-        console.log(data)
         const weatherNow = Math.round((data.main.temp))-273
         temperature.textContent = "Idag: "+weatherNow+" "+"℃";
     
@@ -286,19 +281,15 @@ async function getWeatherData(city){
         // Slice up the two thr next days data
         // const nextDays = data.list.slice((23-hour), (23-hour+24))
         const nextDays = data.list
-        console.log(data.list)
-        console.log(nextDays)
-        
         
         nextdays.day1.temp = Math.round(nextDays[12].main.temp)-273
-        console.log(nextDays.day1)
         nextdays.day2.temp = Math.round(nextDays[12+10].main.temp)-273
         nextdays.day3.temp = Math.round(nextDays[12+20].main.temp)-273
 10
         
-        document.querySelector(".day1").innerHTML = getNextDays()[0]+`<span class="">${nextdays.day1.temp} ℃</span>`
-        document.querySelector(".day2").innerHTML = getNextDays()[1]+`<span class="">${nextdays.day2.temp} ℃</span>`
-        document.querySelector(".day3").innerHTML = getNextDays()[2]+`<span class="">${nextdays.day3.temp} ℃</span>`
+        document.querySelector(".day1").innerHTML = `<span class="weather-day">${getNextDays()[0]}</span>`+`<span >${nextdays.day1.temp} ℃</span>`
+        document.querySelector(".day2").innerHTML = `<span class="weather-day">${getNextDays()[1]}</span>`+`<span >${nextdays.day2.temp} ℃</span>`
+        document.querySelector(".day3").innerHTML = `<span class="weather-day">${getNextDays()[2]}</span>`+`<span >${nextdays.day3.temp} ℃</span>`
 
     })
 
@@ -316,7 +307,6 @@ setInterval(function(){
     }else{
         highlightsCount++
     }
-    console.log(highlightsCount)
 }, 10000)
 
 
@@ -455,6 +445,12 @@ openRecipesModal.addEventListener("click", function(){
     document.querySelector(".modal-recipes").classList.remove("hidden")
     displaySavedRecipes()
 
+})
+
+closeRecipeDetailsBtn.addEventListener("click", function(e){
+    const modal = e.target.parentNode.parentNode;
+
+    modal.classList.add("hidden")
 })
 
 // newItemBtn.addEventListener("click", openAddList)
@@ -830,7 +826,14 @@ function displayRecipeLists(recipes){
 
     document.querySelector(".recipes-list").insertAdjacentHTML("afterbegin", html)
     saveRecipeListener()
+    seeRecipeListener()
+}
 
+
+function seeRecipeListener(){
+    document.querySelectorAll(".see-recipe").forEach(e=>{
+        e.addEventListener("click", seeRecipe)
+    })
 }
 
 
@@ -854,6 +857,31 @@ function isSaved(id){
     return saved.length !==0
 }
 
+
+function seeRecipe(e){
+    let recipeid = e.target.parentNode.parentNode.parentNode.dataset.id
+
+    document.querySelector(".recipe-details-modal").classList.remove("hidden")
+
+
+    // fetch the recipedata
+
+    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeid}`).then(res=> res.json()).then(data=>{
+        console.log(data.meals[0])
+
+        const meal = data.meals[0]
+
+    // Update the view
+
+    const instructions = meal.strInstructions
+    console.log(instructions)
+
+    document.querySelector(".meal-title").textContent = meal.strMeal
+    document.querySelector(".meal-origin").textContent = meal.strArea
+    // document.querySelector(".meal-origin").textContent = meal.strArea
+
+    })
+}
 
 
 function saveRecipe(e){
