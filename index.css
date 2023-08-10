@@ -892,8 +892,8 @@ button:hover{
 .recipe-details-modal{
     position: absolute;
     position: fixed;
-    background-color: #fdfeff;
-    color: #082032;
+    background-color: #334756;
+    color: #FFFFFF;
     padding: 25px;
     border-radius: 10px;
     overflow: scroll;
@@ -947,7 +947,7 @@ button:hover{
 }
 
 .instructions{
-    border-left: 1px solid #082032;
+    border-left: 1px solid #ffffff;
     padding-left: -10px;
     }
 
@@ -960,9 +960,26 @@ button:hover{
         border-radius: 5px;
         right: 20px;
         overflow: hidden
+
 }
 
 .recipe-video img{
     width: 150px;
     height: 150px;
+}
+
+.ingredients{
+
+    width: 70%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-bottom: 1px solid #fdfeff;
+    padding-bottom: 15px;
+}
+.ingredient{
+    margin: 5px;
+    padding: 5px;
+    text-decoration: underline;
 }

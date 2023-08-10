@@ -893,8 +893,33 @@ function seeRecipe(e){
    document.querySelector(".recipe-video img").src = meal.strMealThumb=""
    console.log(state.recipes.recipeList)
    
+
+   // Display ingredients
+   const ingredientStr = []
    
-   // Get src img from the recipes list
+   
+   for (const key in meal) {
+       if(key.startsWith("strIngredient") && meal[key]){
+           const ingredientNumber = key.split("t")
+        let n = ingredientNumber[ingredientNumber.length-1]
+        let measure = "strMeasure"+n
+        
+        ingredientStr.push(meal[measure]+" "+ meal[key])
+    }
+
+}
+
+const ingredientsHtml = ingredientStr.map(el=>{
+    return `<div class="ingredient">
+    ${el}
+    </div>`
+}).join("")
+
+
+    document.querySelector(".ingredients").innerHTML=""
+    document.querySelector(".ingredients").insertAdjacentHTML("afterbegin", ingredientsHtml)
+
+// Get src img from the recipes list
    const imgSrc = state.recipes.recipeList.filter(el=> el.idMeal==recipeid)
    console.log(imgSrc[0])
    document.querySelector(".recipe-video img").src = imgSrc[0].strMealThumb;
