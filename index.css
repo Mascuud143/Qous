@@ -975,11 +975,28 @@ button:hover{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    border-bottom: 1px solid #fdfeff;
     padding-bottom: 15px;
+    height: fit-content;
 }
 .ingredient{
     margin: 5px;
     padding: 5px;
     text-decoration: underline;
+
+}
+
+.more-ingredients{
+
+    width: 70%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 15px;
+border-bottom: 1px solid #fdfeff;
+}
+
+.hidden{
+    visibility: hidden;
+    display: none;
 }

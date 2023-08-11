@@ -895,7 +895,8 @@ function seeRecipe(e){
    
 
    // Display ingredients
-   const ingredientStr = []
+   let ingredientStr = []
+   let moreIngredientStr = []
    
    
    for (const key in meal) {
@@ -909,7 +910,26 @@ function seeRecipe(e){
 
 }
 
+
+// check for more ingredients
+
+if(ingredientStr.length>3){
+    console.log("More ingredients")
+    moreIngredientStr = ingredientStr.slice(3)
+    ingredientStr=ingredientStr.slice(0,3)
+    
+}
+    console.log(ingredientStr)
+    console.log(moreIngredientStr)
+
+
 const ingredientsHtml = ingredientStr.map(el=>{
+    return `<div class="ingredient">
+    ${el}
+    </div>`
+}).join("")
+
+const moreIngredientHtml = moreIngredientStr.map(el=>{
     return `<div class="ingredient">
     ${el}
     </div>`
@@ -917,7 +937,9 @@ const ingredientsHtml = ingredientStr.map(el=>{
 
 
     document.querySelector(".ingredients").innerHTML=""
+    document.querySelector(".more-ingredients").innerHTML=""
     document.querySelector(".ingredients").insertAdjacentHTML("afterbegin", ingredientsHtml)
+    document.querySelector(".more-ingredients").insertAdjacentHTML('afterbegin', moreIngredientHtml)
 
 // Get src img from the recipes list
    const imgSrc = state.recipes.recipeList.filter(el=> el.idMeal==recipeid)
@@ -1009,3 +1031,25 @@ function displaySavedRecipes(){
 }
 
 
+
+//  Expand ingreidents and show less
+const moreIngredientsBtn = document.querySelector(".more-ingredients-btn");
+
+moreIngredientsBtn.addEventListener("click", showMoreIngredients)
+
+
+function showMoreIngredients(){
+    if(moreIngredientsBtn.textContent=="more"){
+        console.log("more btn")
+        document.querySelector(".more-ingredients").classList.remove("hidden")
+        moreIngredientsBtn.textContent = "Less"
+        
+    }else if(moreIngredientsBtn.textContent=="less"){
+        document.querySelector(".more-ingredients").classList.add("hidden")
+        moreIngredientsBtn.textContent = "More"
+
+    }
+    
+
+
+}
