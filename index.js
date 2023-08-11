@@ -1039,14 +1039,15 @@ moreIngredientsBtn.addEventListener("click", showMoreIngredients)
 
 
 function showMoreIngredients(){
-    if(moreIngredientsBtn.textContent=="more"){
+    console.log(moreIngredientsBtn.textContent)
+    if(moreIngredientsBtn.textContent.trim()=="More ingredients"){
         console.log("more btn")
         document.querySelector(".more-ingredients").classList.remove("hidden")
-        moreIngredientsBtn.textContent = "Less"
+        moreIngredientsBtn.textContent = "Less ingredients"
         
-    }else if(moreIngredientsBtn.textContent=="less"){
+    }else if(moreIngredientsBtn.textContent.trim()=="Less ingredients"){
         document.querySelector(".more-ingredients").classList.add("hidden")
-        moreIngredientsBtn.textContent = "More"
+        moreIngredientsBtn.textContent = "More ingredients"
 
     }
     

@@ -949,6 +949,9 @@ button:hover{
 .instructions{
     border-left: 1px solid #ffffff;
     padding-left: -10px;
+
+    border-top: 1px solid white;
+    margin-top: 10px;
     }
 
 
@@ -988,12 +991,11 @@ button:hover{
 .more-ingredients{
 
     width: 70%;
-
+    margin-bottom: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     padding-bottom: 15px;
-border-bottom: 1px solid #fdfeff;
 }
 
 .hidden{
