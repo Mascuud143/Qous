@@ -675,21 +675,6 @@ margin: 10px;
     animation-timing-function: ease-in;
   }
 
-  @keyframes slideUp {
-    0%,
-    50% {
-      transform: translateY(100%);
-      opacity: 0;
-    }
-     
-    60%,
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    
-    }
-  }
-
 
   .salah{
     font-size: 30px;
@@ -775,6 +760,7 @@ margin: 10px;
     width: 200px;
     height: fit-content;
     margin: 10px;
+    border: .001px solid #ffeba138;
 }
 
 .recipe:hover{
@@ -845,15 +831,18 @@ margin: 10px;
 
 
 .saved-recipes{
+    width: 30%;
     border-style: none;
     padding-left: 20px;
-    border-left: .5px solid white;
-    /* background-color: red; */
+    border: .5px solid white;
+    background-color: #334756;
+    padding: 15px;
+    border-radius: 5px;
 }
 
 
 .saved-recipe{
-    background-color: #334756;
+    background-color: #23333f;
     padding: 10px;
     border-radius: 4px;
     margin: 10px;
@@ -1002,3 +991,50 @@ button:hover{
     visibility: hidden;
     display: none;
 }
+
+.more-ingredients-btn{
+    background-color: #FFEBA1;
+    padding: 7px;
+    border-radius: 5px;
+    color: #082032;
+    width: max-content;
+    cursor: pointer;
+}
+
+.more-ingredients-btn:hover{
+    background-color: #23333f;
+    color: #FFEBA1;
+}
+
+.app-setting{
+    /* animation-name: slideUp;
+    animation-duration: .5s; */
+    animation-timing-function: ease-in;
+    position: absolute;
+    top: 17%;
+    right: 16.4%;
+    width: 26%;
+    height: 65%;
+    background-color: #FFEBA1;
+    color: #23333f;
+    padding: 10px;
+    border-radius: 8px;
+
+}
+
+
+
+@keyframes slideUp {
+    0%,
+    50% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+     
+    60%,
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    
+    }
+  }

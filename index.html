@@ -26,7 +26,7 @@
         <div class="nav-items">
             <button class="nav-item btn-home"><i class="fa-solid fa-house"></i> The Home</button>
             <button class="nav-item btn-family"><i class="fa-solid fa-users"></i> The Family</button>
-            <button class="nav-item"><i class="fa-solid fa-gear"></i> QOUS</button>
+            <button class="nav-item app-setting-btn"><i class="fa-solid fa-gear"></i> QOUS</button>
         </div>
     </nav>       
 
@@ -178,7 +178,7 @@
     <div class="modal modal-shopping hidden">
 
         <div class="modal-header">
-            <div class="modal-title">Shopping</div>
+            <div class="modal-title">Lists</div>
             <div class="modal-close-btn">X</div>
         </div>
 
@@ -367,7 +367,7 @@
         
         
     </div>
-    <div class="modal modal-recipes ">
+    <div class="modal modal-recipes hidden">
         <div class="modal-header">
             <div class="modal-title">Recipes</div>
             <div class="modal-close-btn">X</div>
@@ -410,7 +410,7 @@
         </div>
 
         
-        <div class="recipe-details-modal ">
+        <div class="recipe-details-modal hidden ">
             <header>
                 <div class="meal-origin"></div>
                 <div class="meal-title"> <span class="meal-tag light"></span></div>
@@ -454,7 +454,17 @@
         </main>
     </div>
 
-  
+  <div class="app-setting hidden">
+    <h4>App setting</h4>
+    <div class="theme">
+        <h5><i class="fa-solid fa-location-dot"></i> Location</h5>
+        <label for="location-setting">Choose location</label>
+        <p>Your current location is <span class="current-location">Trondheim</span></p>
+        <select name="location-setting" id="location-setting">
+            
+        </select>
+    </div>
+  </div>
     <footer>© 2023 <bold>Qous</bold> - Alrights reserved.</footer>
 
     </div>

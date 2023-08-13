@@ -41,6 +41,7 @@ const familyScreen = document.querySelector(".family-screen")
 const openRecipesModal = document.querySelector(".meal-plan")
 const searchRecipes = document.querySelector(".search-area form")
 const closeRecipeDetailsBtn = document.querySelector(".close-recipe-details") 
+const appSettingBtn = document.querySelector(".app-setting-btn")
 
 
 
@@ -333,6 +334,10 @@ window.addEventListener("load", function(e){
 })
 
 
+appSettingBtn.addEventListener("click", function(e){
+    document.querySelector(".app-setting").classList.toggle("hidden")
+})
+
 addMoreBtns.forEach(el=>{
     el.addEventListener("click", openAddList)
 
@@ -469,7 +474,7 @@ function displayCurrentSalah(){
     let [salah, time] = state.prayers.currentPrayer
     salah  = salah.charAt(0).toUpperCase() + salah.slice(1);
     document.querySelector(".current-salah").innerHTML=""
-    document.querySelector(".current-salah").insertAdjacentHTML('afterbegin', `<i class="fa-solid fa-mosque"></i> ${salah}`)
+    document.querySelector(".current-salah").insertAdjacentHTML('afterbegin', `<i class="fa-solid fa-star-and-crescent fa-sm"></i> ${salah}`)
     document.querySelector(".salah-in").innerHTML=""
     document.querySelector(".salah-in").textContent="Adhan at " + time
 }
@@ -1041,7 +1046,6 @@ moreIngredientsBtn.addEventListener("click", showMoreIngredients)
 function showMoreIngredients(){
     console.log(moreIngredientsBtn.textContent)
     if(moreIngredientsBtn.textContent.trim()=="More ingredients"){
-        console.log("more btn")
         document.querySelector(".more-ingredients").classList.remove("hidden")
         moreIngredientsBtn.textContent = "Less ingredients"
         
