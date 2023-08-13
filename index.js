@@ -42,7 +42,7 @@ const openRecipesModal = document.querySelector(".meal-plan")
 const searchRecipes = document.querySelector(".search-area form")
 const closeRecipeDetailsBtn = document.querySelector(".close-recipe-details") 
 const appSettingBtn = document.querySelector(".app-setting-btn")
-
+const watchRecipeVideoBtn = document.querySelector(".recipe-video")
 
 
 const state = {
@@ -867,6 +867,7 @@ function seeRecipe(e){
     let recipeid = e.target.parentNode.parentNode.parentNode.dataset.id
 
     document.querySelector(".recipe-details-modal").classList.remove("hidden")
+    document.querySelector(".recipe-details-modal").dataset.id=recipeid
 
 
     // fetch the recipedata
@@ -895,7 +896,7 @@ function seeRecipe(e){
     document.querySelector(".meal-title").innerHTML = "How to cook "+meal.strMeal
     document.querySelector(".instructions").insertAdjacentHTML("afterbegin", instructionsHtml)
 
-   document.querySelector(".recipe-video img").src = meal.strMealThumb=""
+//    document.querySelector(".recipe-video img").src = meal.strMealThumb=""
    console.log(state.recipes.recipeList)
    
 
@@ -949,9 +950,37 @@ const moreIngredientHtml = moreIngredientStr.map(el=>{
 // Get src img from the recipes list
    const imgSrc = state.recipes.recipeList.filter(el=> el.idMeal==recipeid)
    console.log(imgSrc[0])
-   document.querySelector(".recipe-video img").src = imgSrc[0].strMealThumb;
+//    document.querySelector(".recipe-video img").src = imgSrc[0].strMealThumb;
 
     })
+}
+
+
+async function fetchRecipeById(id){
+    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`).then(res=>res.json()).then(data=>{
+        return data;
+    })
+}
+
+watchRecipeVideoBtn.addEventListener("click", watchRecipeVideo)
+
+async function watchRecipeVideo(e){
+    // <iframe style="position: absolute; top:0;" width="100%" height="100%" src="https://www.youtube.com/embed/ZT9LSsNXXe0" frameborder="0" allowfullscreen></iframe>
+    const recipe = e.target.parentNode.parentNode;
+    const recipeid = e.target.parentNode.parentNode.dataset.id;
+    console.log(recipe.dataset)
+
+    const videoLink = state.recipes.recipeList.filter(el=> el.idMeal==recipeid)
+    console.log(videoLink)
+    // const VideoHtml = `<iframe style="position: absolute; top:0;" width="100%" height="100%" src="${videoLink[0].strMealThumb}" frameborder="0" allowfullscreen></iframe>`
+
+    // recipe.insertAdjacentHTML("beforeend", VideoHtml)
+    const therecipe = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeid}`)
+    const recipeData = await therecipe.json()
+    console.log(recipeData.meals)
+    const url = recipeData.meals[0].strYoutube.split("=")[1]
+    console.log(url)
+    document.querySelector("iframe").src="https://www.youtube.com/embed/"+ url;
 }
 
 

@@ -1,8 +1,14 @@
 
   @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-
+  /* *,
+  *::after,
+  *::before {
+    margin: 0;
+    box-sizing: border-box;
+  } */
 body{
     box-sizing: border-box;
+    border-style: none;
     margin:0;
     padding:0;
     color:white;
@@ -104,6 +110,7 @@ main{
     align-items: center;
     scroll-behavior: smooth;
     overflow: scroll;
+    z-index: 590234;
 }
 
 .modal-header{
@@ -881,7 +888,7 @@ button:hover{
 .recipe-details-modal{
     position: absolute;
     position: fixed;
-    background-color: #334756;
+    background-color: #082032;
     color: #FFFFFF;
     padding: 25px;
     border-radius: 10px;
@@ -889,8 +896,9 @@ button:hover{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-width: 55%;
-    max-height: 55%;
+    min-width: 70%;
+    max-height: 75%;
+    border: .5px solid #FFEBA1;
 }
 
 .recipe-details-modal header{
@@ -901,7 +909,7 @@ button:hover{
     width: 100%;
     color: white;
     margin-bottom: 20px;
-    background-color: #082032;
+    background-color: #334756;
     padding: 10px;
 }
 
@@ -945,14 +953,18 @@ button:hover{
 
 
 .recipe-video{
+    width: max-content;
+    background-color: red;
         position: absolute;
-        width: 150px;
-        height: 150px;
-        top: 100px;
+        position: sticky;
+        left:  80%;
+        bottom: 0px;
         border-radius: 5px;
-        right: 20px;
-        overflow: hidden
 
+}
+
+.recipe-details-modal h4{
+    color: #FFEBA1;
 }
 
 .recipe-video img{
@@ -969,6 +981,7 @@ button:hover{
     justify-content: space-between;
     padding-bottom: 15px;
     height: fit-content;
+    border-left: .5px solid #FFEBA1;
 }
 .ingredient{
     margin: 5px;
@@ -980,11 +993,12 @@ button:hover{
 .more-ingredients{
 
     width: 70%;
-    margin-bottom: 10px;
+    margin-bottom:15px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     padding-bottom: 15px;
+    border-left: .5px solid #FFEBA1;
 }
 
 .hidden{
@@ -999,6 +1013,7 @@ button:hover{
     color: #082032;
     width: max-content;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 .more-ingredients-btn:hover{
@@ -1020,6 +1035,8 @@ button:hover{
     padding: 10px;
     border-radius: 8px;
 
+    border-style: none;
+
 }
 
 
@@ -1038,3 +1055,11 @@ button:hover{
     
     }
   }
+
+
+.iframe{
+    position: absolute;
+    top:400px;
+    right: 10px;
+
+}
