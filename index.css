@@ -219,7 +219,14 @@ option{
     margin: 5px;
 }
 
-
+.shop{
+    background-color: #23333f;
+    color: wheat;
+}
+.add-member-modal{
+    background-color: #FFFFFF;
+    color: #082032;
+}
 
 .hero-action{
     width: 150px;
@@ -441,6 +448,13 @@ option{
     justify-content: space-between;
 }
 
+.new-list-btn {
+    margin-top: 20px;
+    margin-left: 10%;
+    align-self: flex-start;
+    max-height: max-content;
+}
+
 .list{
     position: relative;
     padding: 15px;
@@ -504,8 +518,9 @@ margin: 10px;
 }
 
 .add-item{
-    background-color: #082032;
-    color: #FFFFFF;
+    background-color: #fff;
+    color: #082032;
+    width: max-content;
 }
 
 .add-item div{
@@ -518,9 +533,8 @@ margin: 10px;
 .add-item input{
     border-style: none;
     background-color: transparent;
-    color: #FFFFFF;
-
-    border: .4px solid #fff;
+    color: #23333f;
+    border: .4px solid #082032;
     margin-left: 10px;
     border-radius: 2px;
     padding: 4px;
@@ -536,6 +550,7 @@ margin: 10px;
 #quantity{
     
     background-color: #334756;
+    color: #d3d0d0;
     padding: 4px;
     text-align: center;
     border-radius: 4px;
@@ -563,7 +578,7 @@ margin: 10px;
 
 
 .shop{
-    background-color: #334756;
+    background-color: #050505;
 }
 
 .modal-mini-header{

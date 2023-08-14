@@ -121,7 +121,7 @@
             <!-- Mini modal add family member -->
         </div>
         <button class="open-add-member">Add member</button>
-        <div  class="modal-mini hidden">
+        <div  class="modal-mini add-member-modal hidden">
             
             <div class="modal-mini-header">
                 <div class="modal-mini-header">Add member</div>
@@ -131,6 +131,7 @@
             
             <form action="#">
                 <input class="member-name" name="member-name" type="text">
+                <input class="member-number" name="member-number" type="text">
                 <button class="add-member-btn" type="submit">Add</button>
                 </form>
             </div>
@@ -175,7 +176,7 @@
       </div>
 
     </div>
-    <div class="modal modal-shopping hidden">
+    <div class="modal modal-shopping hidden ">
 
         <div class="modal-header">
             <div class="modal-title">Lists</div>
@@ -229,6 +230,7 @@
        </div>
 
 
+
        <div class="modal-mini add-item hidden">
         <div>
 
@@ -265,11 +267,7 @@
                     <option value="Month">Month</option>
                 </select>
             </div>
-            <div>
 
-                <label for="estimated-cost">Estimated cost</label>
-                <div id="estimated-cost">318,89 NOK</div>
-            </div>
 
             <button type="submit">Add to the list</button>
         </form>

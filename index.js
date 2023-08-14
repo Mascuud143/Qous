@@ -46,6 +46,9 @@ const watchRecipeVideoBtn = document.querySelector(".recipe-video")
 
 
 const state = {
+    setting:{
+        location:""
+    },
 
     family:{
         members:[],
@@ -228,6 +231,7 @@ async function getWeatherData(city){
 
     let lat = 63.4305;
     let long = 10.3951;
+    
     // navigator.geolocation.getCurrentPosition((position) => {
     //     lat = position.coords.latitude;
     //     long = position.coords.longitude;
