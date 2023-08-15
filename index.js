@@ -1088,6 +1088,50 @@ function showMoreIngredients(){
 
     }
     
+}
+
+
+
+
+
+async function showSalahTimeTable(time, coords){
+    //get salah data
+
+    const res= await fetch("/api/salah/table")
+
+    const salahData = await res.json()
 
 
 }
+
+async function getGraphqlBusData(){
+
+    const query = `
+    query{
+        
+            stopPlaces {
+              id
+            }
+          
+    }
+    `
+
+
+
+
+    const res = await fetch("https://cors-anywhere.herokuapp.com/https://api.entur.io/journey-planner/v3/graphql", {
+        method:"POST",
+        headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({query})
+    })
+
+    
+    console.log(res)
+
+
+}
+
+getGraphqlBusData()
