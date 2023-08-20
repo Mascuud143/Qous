@@ -311,7 +311,7 @@
       
 
     </div>
-    <div class="modal modal-travel hidden">
+    <div class="modal modal-travel ">
 
         <div class="modal-header">
             <div class="modal-title">Travel</div>
@@ -319,8 +319,10 @@
         </div>
         <div class="travel-content">
 
-            <form action="#">
-                <h2>Choose departure busstop</h2>
+            <div class="busstop-container">
+
+                <form action="#">
+                    <p>Choose departure busstop</p>
 
                 <select name="busstop-option" id="busstop-option">
                     <option value="41800">Rostengrenda</option>
@@ -328,15 +330,24 @@
                     <option value="61276">Tonstadkrysset</option>
                     <option value="43677">Peder Morsets veg</option>
                 </select>
-
-
-
-
-
-
-
-
+                
+                
+                
+                
+                
+                
+                
+                
             </form>
+            <div class="search-busstop-container">
+                
+                <form action="#">
+                    <p>or search for busstop</p>
+                    <input type="text" name="busstop-search" placeholder="Search busstop...">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
             
             <div class="busstop-table">
                 <div class="to-centre">

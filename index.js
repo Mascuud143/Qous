@@ -43,7 +43,7 @@ const searchRecipes = document.querySelector(".search-area form")
 const closeRecipeDetailsBtn = document.querySelector(".close-recipe-details") 
 const appSettingBtn = document.querySelector(".app-setting-btn")
 const watchRecipeVideoBtn = document.querySelector(".recipe-video")
-
+const searchBusstopForm  = document.querySelector(".search-busstop-container form")
 
 const state = {
     setting:{
@@ -686,7 +686,45 @@ travelBtn.addEventListener("click", async function(e){
     
 })
 
+searchBusstopForm.addEventListener("submit", searchBusstop)
 
+function searchBusstop(e){
+    e.preventDefault()
+
+    const search = document.querySelector(".search-busstop-container form input").value;
+
+    if(search.length>1){
+        console.log(search)
+
+
+        fetch(`https://api.entur.io/geocoder/v1/autocomplete?text=${search}&size=20&lang=no`).then(res=> res.json()).then(data=>{
+            console.log(data)
+
+            // get busstop id
+
+            if(data.features){
+                const stopplace = data.features[0].properties.id;
+                if(stopplace){
+                    const stopId = stopplace.split(":")[2]
+
+                    if(stopId){
+
+                        // fetch table based on stopId
+
+                        // update the state
+                        state.travel.busstop=stopId;
+
+                        getBusstopData(state.travel.busstop)
+                    }else{
+                        alert("Can't find the stop place. Try typing again!")
+                    }
+                }
+            }
+        })
+    }
+
+
+}
 
 async function getBusstopData(stop){
     
