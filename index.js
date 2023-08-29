@@ -229,8 +229,14 @@ async function getWeatherData(city){
     // let lat = 63.4305;
     // let long = 10.3951;
 
-    let lat = 63.4305;
-    let long = 10.3951;
+    // Trondheim
+    // let lat = 63.4305;
+    // let long = 10.3951;
+    
+    // Stavanger
+    let lat = 58.9700;
+    let long = 5.7331;
+
     
     // navigator.geolocation.getCurrentPosition((position) => {
     //     lat = position.coords.latitude;
@@ -1172,4 +1178,17 @@ async function getGraphqlBusData(){
 
 }
 
-getGraphqlBusData()
+// getGraphqlBusData()
+
+
+
+
+
+
+function getTimeTableData(){
+    fetch("https://cloud.timeedit.net/uis/web/student_u/ri13Q65Yg55277Q0g6QY56y7Zc61X83776dY520yZ08Qh6Z6Qnk7bsnlc.html").then(res=> res.json()).then(data=>{
+        console.log(data)
+    })
+}
+
+getTimeTableData()
